@@ -1,4 +1,5 @@
 import React from 'react';
+import 'tachyons';
 import {
   Navbar,
   NavbarBrand
@@ -7,8 +8,8 @@ import {
 const Header = (props) => {
   return (
     <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="./"><font color="secondary"><h3>Sorting Visualizer</h3></font></NavbarBrand>
+      <Navbar className='pa3 ba b--green bg-lightest-blue'>
+        <NavbarBrand href="./"><font color="purple"><h3 >Sorting Visualizer</h3></font></NavbarBrand>
       </Navbar>
     </div>
   );
