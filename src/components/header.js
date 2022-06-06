@@ -1,16 +1,10 @@
 import React from 'react';
 import 'tachyons';
-import {
-  Navbar,
-  NavbarBrand
-} from 'reactstrap';
 
 const Header = (props) => {
   return (
-    <div>
-      <Navbar className='pa3 ba b--green bg-lightest-blue'>
-        <NavbarBrand href="./"><font color="purple"><h3 >Sorting Visualizer</h3></font></NavbarBrand>
-      </Navbar>
+    <div className='tc grow pa2 ba bg-dark-gray dib bw2 shadow-5' style={{fontFamily: "jasmine", fontStyle: "bold", fontSize: "7em"}}>
+      <h3 style={{color:"silver"}}> Sorting Visualizer </h3>
     </div>
   );
 }

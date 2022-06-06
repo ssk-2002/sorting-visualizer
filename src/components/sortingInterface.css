@@ -1,0 +1,5 @@
+/* The sole reason it's added over here, because the inline CSS wasn't working there. Will have to check it later! */
+
+.myClass {
+    font-size: 15px !important;
+  }
