@@ -1,5 +1,4 @@
 export const quickSort = (arr) => {
-
     const tmp_arr = arr.slice();
     const swap_triplets = [];
 
@@ -27,8 +26,7 @@ export const randomizedQuickSort = (arr) => {
 
 const quickSortHelper = (tmp_arr, left, right, swap_triplets, isRandom) => {
 
-    if (left > right)
-        return;
+    if (left > right) return;
 
     if (isRandom) {
         const random_idx = left + Math.floor((right - left) * Math.random());
@@ -36,6 +34,7 @@ const quickSortHelper = (tmp_arr, left, right, swap_triplets, isRandom) => {
         swap_triplets.push([left, random_idx, false]);
     }
 
+    // take the leftmost element as pivot and find its actual position and put the pivot there
     const pivot = tmp_arr[left];
 
     let i = left; // last index having value <= pivot
@@ -47,12 +46,11 @@ const quickSortHelper = (tmp_arr, left, right, swap_triplets, isRandom) => {
             swap_triplets.push([i + 1, j, false]);
             i++;
         }
-
         j++;
     }
 
     swap(tmp_arr, left, i);
-    swap_triplets.push([left, i, true]); /*pivot swapped to final position i*/
+    swap_triplets.push([left, i, true]); // pivot swapped to final position i-> so we mark it as true -> that implies it's a pivot element and it is in its final position
 
     quickSortHelper(tmp_arr, left, i - 1, swap_triplets, isRandom);
     quickSortHelper(tmp_arr, i + 1, right, swap_triplets, isRandom);

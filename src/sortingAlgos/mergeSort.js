@@ -1,3 +1,9 @@
+/*IDEA: Here we apply the same logic that we generally do for merge sort.
+-> One thing that we add is the 'indexValuePairs' where we store each index and corresponding value of that index
+-> The value is bsically the 'final value' of the current state for that particular index (NOTE: The value may get mopdified later in the next steps)
+-> Finally we return an object containing 'final array' and 'indexValuePairs'
+*/
+
 export const mergeSort = (arr) => {
     const tmp = arr.slice();
     const indexValuePairs = [];
@@ -31,15 +37,10 @@ const merge = (arr, left, mid, right, indexValuePairs) => {
     let i = 0, j = 0, k = left;
 
     while (i < leftPart.length && j < rightPart.length) {
-        if (leftPart[i] <= rightPart[j]) {
-            arr[k] = leftPart[i++];
+        if (leftPart[i] <= rightPart[j]) arr[k] = leftPart[i++];
+        else arr[k] = rightPart[j++];
 
-        }
-        else {
-            arr[k] = rightPart[j++];
-        }
-
-        indexValuePairs.push([k, arr[k]]);
+        indexValuePairs.push([k, arr[k]]);  // current index and final value at this index (final value for the current step)
         k++;
     }
 
