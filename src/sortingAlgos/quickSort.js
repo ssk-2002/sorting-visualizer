@@ -34,7 +34,7 @@ const quickSortHelper = (tmp_arr, left, right, swap_triplets, isRandom) => {
         swap_triplets.push([left, random_idx, false]);
     }
 
-    // take the leftmost element as pivot and find its actual position and put the pivot there
+    // take the leftmost element as pivot and find its actual position and put the pivot there -> in case of 'randomized' we already stored 'random-idx' in 'left' 
     const pivot = tmp_arr[left];
 
     let i = left; // last index having value <= pivot

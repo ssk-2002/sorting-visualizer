@@ -19,7 +19,6 @@ export const insertionSort = (arr) => {
         }
         triplets.push([j, j, true]);  // got the final position for now (not the actual final position)
     }
-
     return {triplets: triplets, arr: tmp_arr};
 }
 

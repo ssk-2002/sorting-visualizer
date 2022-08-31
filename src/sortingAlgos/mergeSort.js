@@ -1,6 +1,6 @@
 /*IDEA: Here we apply the same logic that we generally do for merge sort.
 -> One thing that we add is the 'indexValuePairs' where we store each index and corresponding value of that index
--> The value is bsically the 'final value' of the current state for that particular index (NOTE: The value may get mopdified later in the next steps)
+-> The value is bsically the 'final value' of the current state for that particular index (NOTE: The value may get modified later in the next steps)
 -> Finally we return an object containing 'final array' and 'indexValuePairs'
 */
 

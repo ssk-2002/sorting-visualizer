@@ -31,7 +31,8 @@ class SortInterface extends Component {
 
 
     /* RESET ARRAY: Creates a new array of size 'len' with random values for the given range
-    -> At the end we update the state*/
+    -> At the end we update the state
+    */
     resetArray() {
         const new_arr = [];
 
@@ -65,11 +66,13 @@ class SortInterface extends Component {
     HOW IS THE ANIMATION HANDLED?
     While performing the normal merge-sort, we store all the indices along with their modified value of that round, and using that we 
     can highlight the current bar we are working on, and also modify its value with its 'final value so far'. 
+
+    NOTE: Use console.log(indexValuePair) to see what it contains basically
     */
     handleMergeSort() {
 
-        const highlight0 = "yellow";
-        const highlight1 = "#620037";
+        const currentBar = "yellow";
+        const processedBars = "#620037";
 
         this.setState({
             isBusy: true
@@ -79,17 +82,18 @@ class SortInterface extends Component {
         const indexValuePairs = result.indexValuePairs;
         const tmp_arr = result.arr;
         const bars = document.getElementsByClassName("bar");
+        // console.log(indexValuePairs);
 
         indexValuePairs.map((pair, index) => {
             setTimeout(   
                 () => { 
                     if(index > 0){
-                        bars[indexValuePairs[index-1][0]].style.backgroundColor = highlight1;
+                        bars[indexValuePairs[index-1][0]].style.backgroundColor = processedBars;
                     } 
 
                     // change the height of the current bar (pair[0] index) by the value of pair[1] and also change the color to 'yellow'-> that tells in which bar we are working currently 
                     bars[pair[0]].style.height = `${pair[1]}px`;  
-                    bars[pair[0]].style.backgroundColor = highlight0; 
+                    bars[pair[0]].style.backgroundColor = currentBar; 
 
                     if (index === indexValuePairs.length - 1) {
                         this.setState({
@@ -119,15 +123,19 @@ class SortInterface extends Component {
        the swapped indices are same or not -> If they are same we don't do anything, otherwise we change the color of the first index (non-pivot)
     -> For the current two bars, we swap the heights and if it is a pivot we change its color to 'purple'
 
+    RANDOMIZED: To apply the 'Randomized Quick Sort' we only generate the pivot-index randomly for the range, and rest of the thungs remains same 
+
     HOW IS THE ANIMATION HANDLED? 
     When we perform the normal quick-sort we store all the pair of indices that are swapped, that gives us an way to access the bars 
     that are currently in use, so we highlight them. ANd also we store a bool value, that tells whether it was a pivot element or not. 
     If it was pivot that means it has got its final position, so we can mark this bar with a different color, and it should not get modified again.
     The moment we are done swapping a pair (non-pivot), we change the colors to black again, because they are not yet in their final position
+
+    NOTE: Use console.log(swap_triplets) to see what are stored in 'swap_triplets' 
     */
     handleQuickSort(isRandomized) {
-        const highlight0 = "#620037";
-        const highlight1 = "yellow";
+        const processedBars = "#620037";  // the pivots are basically colored with this color
+        const currentBar = "yellow";
 
         let result = [];
 
@@ -136,9 +144,10 @@ class SortInterface extends Component {
         else result = quickSort(this.state.arr);
 
         const swap_triplets = result.swap_triplets;
-        const tmp_arr = result.arr;
+        const tmp_arr = result.arr; 
 
         const bars = document.getElementsByClassName("bar");
+        // console.log(swap_triplets);
 
         this.setState({
             isBusy: true
@@ -146,9 +155,9 @@ class SortInterface extends Component {
 
         swap_triplets.map((triplet, index) => {
             setTimeout(() => {
-                // set the two bars' color to 'yellow' that means we are wokring on them -> we can have one sungle bar also sometimes -> in that case only one bar is highlighted
-                bars[triplet[0]].style.backgroundColor = highlight1;
-                bars[triplet[1]].style.backgroundColor = highlight1;
+                // set the two bars' color to 'yellow' that means we are wokring on them -> we can have one single bar also sometimes -> in that case only one bar gets highlighted
+                bars[triplet[0]].style.backgroundColor = currentBar;
+                bars[triplet[1]].style.backgroundColor = currentBar;
 
                 // change previous bars' colors to 'black' (except pivot)
                 if (index > 0) {
@@ -158,7 +167,6 @@ class SortInterface extends Component {
                     }
                     else if (swap_triplets[index - 1][0] != swap_triplets[index - 1][1])
                         bars[swap_triplets[index - 1][0]].style.backgroundColor = this.state.barColor;
-
                 }
 
                 // swap heights
@@ -166,9 +174,9 @@ class SortInterface extends Component {
                 bars[triplet[0]].style.height = bars[triplet[1]].style.height;
                 bars[triplet[1]].style.height = height0;
 
-                // if pivot, change color to 'purple' 
+                // if pivot, change color to 'purple' -> 2nd index is for the pivot -> triplet[1]
                 if (triplet[2]) {
-                    bars[triplet[1]].style.backgroundColor = highlight0;
+                    bars[triplet[1]].style.backgroundColor = processedBars;
                 }
 
                 // the moment when we reach the end, we update the states
@@ -185,6 +193,8 @@ class SortInterface extends Component {
             } , index * this.state.timePerBar);
         });
     }
+
+
 
 
 
